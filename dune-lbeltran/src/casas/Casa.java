@@ -8,7 +8,7 @@ public abstract class Casa {
 
     private ApellidoNobiliario apellidoNobiliario;
     private String lider;
-    // private subditos ;
-    //private territorios
 
+    // private subditos ; no se si es un entero o herde dela clase
+    //private territorios como llamo a CAladan pro ejemplo
 }

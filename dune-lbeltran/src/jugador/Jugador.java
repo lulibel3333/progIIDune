@@ -10,6 +10,7 @@ public class Jugador {
 
     private String alias;
     private Casa casa;
+    // el territorio q establece la cantidad inicial de melange
     private int recursos;
     // private centroDeMando ;
 

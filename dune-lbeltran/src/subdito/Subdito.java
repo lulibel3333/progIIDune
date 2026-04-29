@@ -9,5 +9,7 @@ import src.dunee.casas.Casa;
 public class Subdito {
 
     private Casa casa;
+    private int energia;
+    private int experiencia;
 
 }

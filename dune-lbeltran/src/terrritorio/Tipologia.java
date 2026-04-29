@@ -1,4 +1,4 @@
-package src.dunee.terrritotrio;
+package terrritorio;
 
 /**
  *
