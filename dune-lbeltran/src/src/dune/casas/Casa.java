@@ -6,4 +6,8 @@ package dune.casas;
  */
 public class Casa {
 
+    private ApellidoNobiliario apellidoNobiliario;
+    private String lider;
+    // private subditos ;
+
 }
