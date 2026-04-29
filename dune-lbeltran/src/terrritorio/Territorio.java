@@ -1,8 +1,5 @@
 package terrritorio;
 
-
-import terrritorio.Tipologia;
-
 /**
  *
  * @author Luana Beltrán <luana.beltranrodas@usp.ceu.es>
@@ -33,4 +30,5 @@ public abstract class Territorio {
 
     }
 
+    // hacer algo de superfice contruida que de erro cuando sobrepasa 100
 }
