@@ -1,4 +1,4 @@
-package dune.terrritotrio;
+package src.dunee.terrritotrio;
 
 /**
  *

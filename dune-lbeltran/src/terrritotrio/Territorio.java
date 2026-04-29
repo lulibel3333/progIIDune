@@ -1,4 +1,5 @@
-package dune.terrritotrio;
+
+import src.dunee.terrritotrio.Tipologia;
 
 /**
  *

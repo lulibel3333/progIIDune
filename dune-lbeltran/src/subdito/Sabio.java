@@ -1,9 +1,9 @@
-package src.dune.casas;
+package subdito;
 
 /**
  *
  * @author Luana Beltrán <luana.beltranrodas@usp.ceu.es>
  */
-public class Corrino {
+public class Sabio {
 
 }
