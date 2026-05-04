@@ -4,6 +4,10 @@ package subdito;
  *
  * @author Luana Beltrán <luana.beltranrodas@usp.ceu.es>
  */
-public class Explorador {
+public class Explorador extends Subdito {
+
+    public Explorador(int energia, int experiencia) {
+        super(energia, experiencia);
+    }
 
 }

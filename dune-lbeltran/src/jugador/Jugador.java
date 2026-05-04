@@ -12,6 +12,6 @@ public class Jugador {
     private Casa casa;
     // el territorio q establece la cantidad inicial de melange
     private int recursos;
-    // private centroDeMando ;
+    // private centroDeMando ;s
 
 }
