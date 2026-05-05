@@ -9,9 +9,15 @@ import src.dunee.casas.Casa;
 public class Jugador {
 
     private String alias;
+
     private Casa casa;
+
+    /*
     // el territorio q establece la cantidad inicial de melange
-    private int recursos;
+    private int recursos, es la melange.
+
     // private centroDeMando ;s
 
+
+     */
 }

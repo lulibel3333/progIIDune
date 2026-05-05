@@ -1,6 +1,7 @@
 
 import src.dunee.casas.ApellidoNobiliario;
 import src.dunee.casas.Casa;
+import terrritorio.Arrakeen;
 
 /**
  *
@@ -9,8 +10,8 @@ import src.dunee.casas.Casa;
 public class Atreides extends Casa {
 
     //domina caladan , eso como ponerlo ????
-    public Atreides(ApellidoNobiliario apellidoNobiliario, String lider) {
-        super(ApellidoNobiliario.ATREIDES, "Duke Leto Atreides");
+    public Atreides() {
+        super(ApellidoNobiliario.ATREIDES, "Duke Leto Atreides", new Arrakeen());
     }
 
 }

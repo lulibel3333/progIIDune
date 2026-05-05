@@ -1,5 +1,4 @@
 
-import src.dunee.casas.ApellidoNobiliario;
 import src.dunee.casas.Casa;
 
 /**
@@ -8,7 +7,7 @@ import src.dunee.casas.Casa;
  */
 public class Harkonnen extends Casa {
 
-    public Harkonnen(ApellidoNobiliario apellidoNobiliario, String lider) {
+    public Harkonnen() {
         super(apellidoNobiliario.HARKONNEN, "Barón Vladimir Harkonnen");
     }
 

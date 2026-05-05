@@ -1,5 +1,4 @@
 
-import src.dunee.casas.ApellidoNobiliario;
 import src.dunee.casas.Casa;
 
 /**
@@ -9,7 +8,7 @@ import src.dunee.casas.Casa;
 public class Corrino extends Casa {
 
     // presencia en Salusa Secundus
-    public Corrino(ApellidoNobiliario apellidoNobiliario, String lider) {
+    public Corrino() {
         super(apellidoNobiliario, lider);
     }
 

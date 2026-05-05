@@ -1,6 +1,6 @@
 package subdito;
 
-import src.dunee.casas.Casa;
+import terrritorio.Territorio;
 
 /**
  *
@@ -8,14 +8,19 @@ import src.dunee.casas.Casa;
  */
 public abstract class Subdito {
 
-    private Casa casa; //esto deberia ser un enumerado dentro de lo q es la clase subdito?
+    private Territorio territorio;
     private int energia;
     private int experiencia;
 
+    //private int salario; ???
     public Subdito(int energia, int experiencia) {
         this.energia = energia;
         this.experiencia = experiencia;
 
+    }
+
+    public int getExperiencia() {
+        return this.experiencia;
     }
 
 }
