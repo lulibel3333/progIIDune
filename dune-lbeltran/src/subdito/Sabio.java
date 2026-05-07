@@ -11,7 +11,7 @@ public class Sabio extends Subdito {
     }
 
     @Override
-    public int getSalario() {
+    public int recibirSalario() {
         return 2;
     }
 }

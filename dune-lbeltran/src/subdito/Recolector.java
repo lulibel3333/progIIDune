@@ -17,7 +17,7 @@ tienen un salario de 3 unidades.
 
      */
     @Override
-    public int getSalario() {
+    public int recibirSalario() {
         return 3;
     }
 

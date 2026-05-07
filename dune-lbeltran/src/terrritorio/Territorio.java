@@ -183,4 +183,39 @@ public abstract class Territorio {
 
         return (int) energiaGenerada;
     }
+
+    /*
+    Además, aquellos afortunados que habiten
+    territorios con más de un 60 % de la superficie
+construída, disfrutarán de unas comodidades que
+  les otorgará 2 puntos extra de energía por cada ciclo
+     */
+    public void VerSiMuere() {
+
+        for (Subdito s : listaSubditos) {
+
+            ////devuelve el salario en funcion del tipo de subdito que sea
+            int sueldoDelSubdito = s.recibirSalario();
+            /* si las reservas del territorio tienen suficiente
+melagne para pagar entocnes le quitas el sueldo
+             */
+            if (this.reservas_almacenadas >= sueldoDelSubdito) {
+
+                this.reservas_almacenadas = this.reservas_almacenadas - sueldoDelSubdito;
+                s.sobrevivir();
+
+                if (this.superficie_construida > 60) {
+                    int energiaExtra = s.getEnergia() + 2;
+                    s.setEnergia(energiaExtra);
+                }
+
+            } else {
+                // Si no puedo pagar el sueldo, muere ,y lo añaades al arraylist de fallecidos
+
+                listaSubditos.remove(s);
+            }
+        }
+
+        //quitas de la lista subditos la gente q ha fallecido
+    }
 }

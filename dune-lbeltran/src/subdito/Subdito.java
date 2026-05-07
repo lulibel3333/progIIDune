@@ -1,14 +1,12 @@
 package subdito;
 
-import terrritorio.Territorio;
-
 /**
  *
  * @author Luana Beltrán <luana.beltranrodas@usp.ceu.es>
  */
 public abstract class Subdito {
 
-    private Territorio territorio;
+    // private Territorio territorio;
     private int energia;
     private int experiencia;
 
@@ -27,7 +25,11 @@ public abstract class Subdito {
         this.energia = energia;
     }
 
-    public abstract int getSalario();
+    public int getEnergia() {
+        return this.energia;
+    }
+
+    public abstract int recibirSalario();
 
     /*
     sobrevivirán, sino que recuperarán 2 puntos
@@ -39,4 +41,10 @@ de energía y ganarán 5 unidades de experiencia.
         this.experiencia += 5;
     }
 
+    /*
+    public int getEnergia() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+     */
 }
