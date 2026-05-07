@@ -2,7 +2,11 @@ package terrritorio;
 
 import java.util.*;
 import subdito.Recolector;
+import subdito.Sabio;
 import subdito.Subdito;
+import static terrritorio.Capacidad.ALTA;
+import static terrritorio.Capacidad.BAJA;
+import static terrritorio.Capacidad.MEDIA;
 
 /**
  *
@@ -43,16 +47,20 @@ public abstract class Territorio {
     }
 
     public int getEnergia_inicial() {
-        return energia_inicial;
+        return this.energia_inicial;
     }
 
     public Capacidad getCapacidad_produccion() {
-        return capacidad_produccion;
+        return this.capacidad_produccion;
 
     }
 
     public int getReservas_almacenadas() {
-        return reservas_almacenadas;
+        return this.reservas_almacenadas;
+    }
+
+    public int getExtension() {
+        return this.extension;
     }
 
     // hacer algo de superfice contruida que de erro cuando sobrepasa 100
@@ -104,8 +112,75 @@ public abstract class Territorio {
         }
     }
 
+    /*
     public void añadirSubdito(Subdito s) {
         this.listaSubditos.add(s);
     }
+     */
+    public int CalculoEnergiaRequerida() {
+        double alfa = 0.0;
+        int beta = 1;
+        double resultadoFinal = 0;
+        switch (this.capacidad_construccion) {
+            case ALTA:
+                alfa = 0.5;
+                break;
+            case MEDIA:
+                alfa = 1.0;
+                break;
+            case BAJA:
+                alfa = 3.0;
+                break;
+        }
 
+        if (this.superficie_construida < 33) {
+            beta = 3;
+        }
+        if (this.superficie_construida >= 33 && this.superficie_construida < 80) {
+            beta = 2;
+        }
+        if (this.superficie_construida >= 80) {
+            beta = 1;
+        }
+
+        //me da error mirar
+        double energiaRequerida = alfa * beta * (this.extension / this.superficie_construida);
+
+        double sumaExperienciaSabios = 0;
+        int numSabios = 0;
+        for (Subdito s : listaSubditos) {
+            if (s instanceof Sabio) {
+                sumaExperienciaSabios = sumaExperienciaSabios + s.getExperiencia();
+                numSabios++;
+            }
+        }
+
+        if (numSabios > 0) {
+            double mediaExperiencia = sumaExperienciaSabios / numSabios;
+            resultadoFinal = (energiaRequerida * (mediaExperiencia / 4.0));
+        }
+
+        return (int) resultadoFinal;
+    }
+
+    public int CalculoEnergiaGenerada() {
+        double alfa = 0;
+        double energiaGenerada = 0;
+
+        switch (this.capacidad_generacion_en) {
+            case ALTA:
+                alfa = 2.0;
+                break;
+            case MEDIA:
+                alfa = 1.0;
+                break;
+            case BAJA:
+                alfa = 0.5;
+                break;
+        }
+
+        energiaGenerada = alfa * (this.superficie_construida * this.extension) / 100;
+
+        return (int) energiaGenerada;
+    }
 }

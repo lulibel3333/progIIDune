@@ -10,4 +10,9 @@ public class Guerrero extends Subdito {
         super(energia, experiencia);
     }
 
+    @Override
+    public int getSalario() {
+        return 4;
+    }
+
 }

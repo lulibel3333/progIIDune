@@ -23,4 +23,20 @@ public abstract class Subdito {
         return this.experiencia;
     }
 
+    public void setEnergia(int energia) {
+        this.energia = energia;
+    }
+
+    public abstract int getSalario();
+
+    /*
+    sobrevivirán, sino que recuperarán 2 puntos
+de energía y ganarán 5 unidades de experiencia.
+
+     */
+    public void sobrevivir() {
+        this.energia += 2;
+        this.experiencia += 5;
+    }
+
 }
