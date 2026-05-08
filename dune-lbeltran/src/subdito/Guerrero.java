@@ -10,6 +10,12 @@ public class Guerrero extends Subdito {
         super(energia, experiencia);
     }
 
+    public Guerrero() {
+        // Llamamos al constructor del padre con valores iniciales
+        // Por ejemplo: 100 de energía y 0 de experiencia
+        super(100, 0);
+    }
+
     @Override
     public int recibirSalario() {
         return 4;

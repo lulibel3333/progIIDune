@@ -10,6 +10,10 @@ public class Recolector extends Subdito {
         super(energia, experiencia);
     }
 
+    public Recolector() {
+        super(100, 0);
+    }
+
     /*
     Finalmente, los recolectores, cuyo trabajo es
     fundamental para la cosecha de la especia,

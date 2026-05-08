@@ -10,6 +10,10 @@ public class Explorador extends Subdito {
         super(energia, experiencia);
     }
 
+    public Explorador() {
+        super(100, 0);
+    }
+
     @Override
     public int recibirSalario() {
         return 2;

@@ -10,6 +10,10 @@ public class Sabio extends Subdito {
         super(energia, experiencia);
     }
 
+    public Sabio() {
+        super(100, 0);
+    }
+
     @Override
     public int recibirSalario() {
         return 2;

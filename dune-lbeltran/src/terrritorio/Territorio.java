@@ -1,6 +1,9 @@
 package terrritorio;
 
 import java.util.*;
+import src.dunee.casas.Casa;
+import subdito.Explorador;
+import subdito.Guerrero;
 import subdito.Recolector;
 import subdito.Sabio;
 import subdito.Subdito;
@@ -61,6 +64,10 @@ public abstract class Territorio {
 
     public int getExtension() {
         return this.extension;
+    }
+
+    public List<Subdito> getListaSubditos() {
+        return listaSubditos;
     }
 
     // hacer algo de superfice contruida que de erro cuando sobrepasa 100
@@ -195,14 +202,13 @@ construída, disfrutarán de unas comodidades que
         for (Subdito s : listaSubditos) {
 
             ////devuelve el salario en funcion del tipo de subdito que sea
-            int sueldoDelSubdito = s.recibirSalario();
+           // int sueldoDelSubdito = s.recibirSalario();
             /* si las reservas del territorio tienen suficiente
 melagne para pagar entocnes le quitas el sueldo
              */
-            if (this.reservas_almacenadas >= sueldoDelSubdito) {
+            if (this.reservas_almacenadas >= s.recibirSalario()) {
 
-                this.reservas_almacenadas = this.reservas_almacenadas - sueldoDelSubdito;
-                s.sobrevivir();
+                this.reservas_almacenadas = this.reservas_almacenadas - s.recibirSalario();
 
                 if (this.superficie_construida > 60) {
                     int energiaExtra = s.getEnergia() + 2;
@@ -217,5 +223,104 @@ melagne para pagar entocnes le quitas el sueldo
         }
 
         //quitas de la lista subditos la gente q ha fallecido
+    }
+
+    /*
+    demografía natural hace que nazcan entre 1 y 3 súbditos, cada 5 ciclos.
+    La actividad a la quese dedicarán es una incógnita
+    y depende del azar. Lo único que se sabe es que el 30 % de los
+súbditos prefieren las labores de recolección, el 40 % prefieren
+    actividades guerreras, el 20 % lesgustan las tareas
+    de exploración y el 10 % son estudiosos que llegarán a ser sabios.
+     */
+    public void Nacimientos(int ciclo) {
+
+        //ocurren nacimientos cada 5 ciclos
+        if (ciclo % 5 == 0) {
+
+            //es un random entrw 1 y 3
+            int cantidadNacimientos = 0;
+
+            for (int i = 0; i < cantidadNacimientos; i++) {
+
+                //es un numero aleatorio entre 0 a 100
+                double azar = Math.random() * 100;
+                //creas un subdito nuevo
+                Subdito subditoNuevo;
+
+                if (azar < 30) {
+                    subditoNuevo = new Recolector(); // 30%
+                } else if (azar < 70) {
+                    subditoNuevo = new Guerrero();   // 40% (30 + 40)
+                } else if (azar < 90) {
+                    subditoNuevo = new Explorador(); // 20% (70 + 20)
+                } else {
+                    subditoNuevo = new Sabio();      // 10% (el resto hasta 100)
+                }
+
+                this.listaSubditos.add(subditoNuevo);
+                // System.out.println("Ha nacido un nuevo " + nuevo.getClass().getSimpleName());
+            }
+
+        }
+
+    }
+
+    public void trasladoSubditos(Territorio origen, Territorio destino) {
+        for (Subdito s : origen.getListaSubditos()) {
+            s.setEnergia(s.getEnergia() - 20);
+
+            destino.getListaSubditos().add(s);
+            origen.getListaSubditos().remove(s);
+        }
+    }
+
+    public void Expedicion(Casa casaDeAtaque, List<Explorador> expedicion) {
+
+        double sumaExperiencia = 0;
+        double sumaEnergia = 0;
+        int contadorExploradores = 0;
+
+        for (Subdito s : this.listaSubditos) {
+            if (s instanceof Explorador) {
+                sumaExperiencia += s.getExperiencia();
+                sumaEnergia += s.getEnergia();
+                contadorExploradores++;
+            }
+            double mediaExperiencia = sumaExperiencia / contadorExploradores;
+            double mediaEnergia = sumaEnergia / contadorExploradores;
+            double factorEstabilizacion = mediaExperiencia * mediaEnergia;
+
+            double aleatorio = Math.random() * (3 * factorEstabilizacion);
+
+            /*
+            Si el número aleatorio es inferior
+            al factor de estabilización, el territorio es conquistado
+            por la casa a la que pertenecen los exploradores
+             */
+            if (aleatorio < factorEstabilizacion) {
+
+                System.out.println("Territorio estabilizado por los exploradores.");
+                // Aquí asignarías el dueño: this.casaDuena = casaAtacante;
+
+                /*
+                ◦ Si el número aleatorio es igual
+                o superior al factor de estabilización,
+                los exploradores fallan en su hazaña y mueren intentando
+                finalizar su misión.
+                 */
+            } else {
+                // FRACASO: Los exploradores mueren.
+                // Como no quieres listas extra, usamos el Iterator o el for hacia atrás para borrarlos
+                System.out.println("Los exploradores no han podido estabilizar el sector y han muerto.");
+
+                for (Subdito subdito : listaSubditos) {
+                    if (subdito instanceof Explorador) {
+                        listaSubditos.remove(subdito); // <--- ¡¡ERROR AQUÍ!!
+                    }
+                }
+
+            }
+        }
     }
 }
