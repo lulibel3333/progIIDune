@@ -1,5 +1,7 @@
+package modelo.casas;
 
-import src.dunee.casas.Casa;
+
+import modelo.casas.Casa;
 
 /**
  *

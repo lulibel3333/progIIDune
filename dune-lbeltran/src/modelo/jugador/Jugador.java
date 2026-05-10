@@ -1,6 +1,6 @@
-package src.dunee.jugador;
+package modelo.jugador;
 
-import src.dunee.casas.Casa;
+import modelo.casas.Casa;
 
 /**
  *

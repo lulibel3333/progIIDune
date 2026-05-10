@@ -1,4 +1,4 @@
-package subdito;
+package modelo.subdito;
 
 /**
  *

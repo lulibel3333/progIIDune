@@ -1,7 +1,9 @@
+package modelo.casas;
+
 
 import src.dunee.casas.ApellidoNobiliario;
-import src.dunee.casas.Casa;
-import terrritorio.Arrakeen;
+import modelo.casas.Casa;
+import modelo.terrritorio.Arrakeen;
 
 /**
  *

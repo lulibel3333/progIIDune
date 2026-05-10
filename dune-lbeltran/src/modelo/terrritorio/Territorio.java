@@ -1,15 +1,15 @@
-package terrritorio;
+package modelo.terrritorio;
 
 import java.util.*;
-import src.dunee.casas.Casa;
-import subdito.Explorador;
-import subdito.Guerrero;
-import subdito.Recolector;
-import subdito.Sabio;
-import subdito.Subdito;
-import static terrritorio.Capacidad.ALTA;
-import static terrritorio.Capacidad.BAJA;
-import static terrritorio.Capacidad.MEDIA;
+import modelo.casas.Casa;
+import modelo.subdito.Explorador;
+import modelo.subdito.Guerrero;
+import modelo.subdito.Recolector;
+import modelo.subdito.Sabio;
+import modelo.subdito.Subdito;
+import static modelo.terrritorio.Capacidad.ALTA;
+import static modelo.terrritorio.Capacidad.BAJA;
+import static modelo.terrritorio.Capacidad.MEDIA;
 
 /**
  *
@@ -310,17 +310,54 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
                 finalizar su misión.
                  */
             } else {
-                // FRACASO: Los exploradores mueren.
-                // Como no quieres listas extra, usamos el Iterator o el for hacia atrás para borrarlos
                 System.out.println("Los exploradores no han podido estabilizar el sector y han muerto.");
 
                 for (Subdito subdito : listaSubditos) {
                     if (subdito instanceof Explorador) {
-                        listaSubditos.remove(subdito); // <--- ¡¡ERROR AQUÍ!!
+                        listaSubditos.remove(subdito);
                     }
                 }
 
             }
         }
     }
+
+    public void GusanoDeArena(double cosechaDelCiclo) {
+        int numRecolectores = 0;
+
+        if (cosechaDelCiclo > this.reservas_almacenadas * 0.05) {
+
+            for (Subdito s : listaSubditos) {
+                if (s instanceof Recolector) {
+                    numRecolectores++;
+                }
+
+                // double probablidadDeAparicion = 0,5 * numRecolectores;
+            }
+
+        }
+
+    }
+
+    public void Tormenta(double escudosDeViento) {
+
+        if (Math.random() * 100 < 15) {
+
+            if (this.superficie_construida > 60 && escudosDeViento > 150) {
+                System.out.println("ignora la furiadel viento");
+                return;
+
+            } else {
+
+                // devuelves la mitad d la energia d todos los subditos afectados en ese territorio
+                for (Subdito s : this.listaSubditos) {
+                    int energiaDevuelta = s.getEnergia() / 2;
+                    s.setEnergia(energiaDevuelta);
+                }
+
+            }
+        }
+
+    }
+
 }

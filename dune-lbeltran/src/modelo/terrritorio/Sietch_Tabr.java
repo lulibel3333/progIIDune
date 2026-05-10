@@ -1,4 +1,4 @@
-package terrritorio;
+package modelo.terrritorio;
 
 /**
  *

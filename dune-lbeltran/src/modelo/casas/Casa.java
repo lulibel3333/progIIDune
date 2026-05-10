@@ -1,7 +1,7 @@
-package src.dunee.casas;
+package modelo.casas;
 
 import java.util.*;
-import terrritorio.Territorio;
+import modelo.Territorio;
 
 /**
  *
