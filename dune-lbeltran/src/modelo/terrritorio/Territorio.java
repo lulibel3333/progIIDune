@@ -28,9 +28,13 @@ public abstract class Territorio {
 
     private List<Subdito> listaSubditos;
 
+    //private Estado estado;
+    private Casa casa;
+
     public Territorio(int extension, Tipologia tipologia, Capacidad capacidad_construccion,
             int superficie_construida, Capacidad capacidad_generacion_en,
-            int energia_inicial, Capacidad capacidad_produccion, int reservas_almacenadas) {
+            int energia_inicial, Capacidad capacidad_produccion, int reservas_almacenadas
+    /*private Estado estado   */) {
 
         this.extension = extension;
         this.tipologia = tipologia;
@@ -40,8 +44,9 @@ public abstract class Territorio {
         this.energia_inicial = energia_inicial;
         this.capacidad_produccion = capacidad_produccion;
         this.reservas_almacenadas = reservas_almacenadas;
-
+        //  this.estado = estado;
         this.listaSubditos = new ArrayList<>();
+
     }
 
     //getters necesarios
@@ -233,6 +238,12 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
     actividades guerreras, el 20 % lesgustan las tareas
     de exploración y el 10 % son estudiosos que llegarán a ser sabios.
      */
+    public void Nacimientos(Subdito nuevo) {
+        this.listaSubditos.add(nuevo);
+
+    }
+
+    /*
     public void Nacimientos(int ciclo) {
 
         //ocurren nacimientos cada 5 ciclos
@@ -265,6 +276,7 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
         }
 
     }
+     */
 
     public void trasladoSubditos(Territorio origen, Territorio destino) {
         for (Subdito s : origen.getListaSubditos()) {
@@ -275,6 +287,7 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
         }
     }
 
+    //Explorador vs. Territorio vacío
     public void Expedicion(Casa casaDeAtaque, List<Explorador> expedicion) {
 
         double sumaExperiencia = 0;
@@ -331,12 +344,26 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
                 if (s instanceof Recolector) {
                     numRecolectores++;
                 }
-
-                // double probablidadDeAparicion = 0,5 * numRecolectores;
             }
-
         }
 
+        double probabilidadDeAparicion = 0.5 * numRecolectores;;
+
+        if (Math.random() * 100 < probabilidadDeAparicion) {
+
+            this.reservas_almacenadas -= cosechaDelCiclo;
+
+            int infectados = numRecolectores / 2;
+            int contadorMuertes = 0;
+
+            // Usamos el for hacia atrás para borrar de la lista sin errores
+            for (int muerto = listaSubditos.size() - 1; muerto >= 0 && contadorMuertes < infectados; muerto--) {
+                if (listaSubditos.get(muerto) instanceof Recolector) {
+                    listaSubditos.remove(muerto);
+                    contadorMuertes++;
+                }
+            }
+        }
     }
 
     public void Tormenta(double escudosDeViento) {
@@ -360,4 +387,54 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
 
     }
 
+    /*
+    Explorador vs. Explorador: Si ambas casas
+    envían exploradores a un territorio libre,
+no hay combate. El territorio quedará en disputa
+    hasta que una de las dos decida enviar
+guerreros para conquistar el territorio o retirar
+    a sus exploradores.
+     */
+    public void ExploradorContraExplorador() {
+
+    }
+
+    /*
+    public double PotenciaDeDefensa() {
+        return () *   calcularMediaExperiencia() * 100 / (100 - this.superficie_construida);
+    }
+
+     */
+    public int PotenciaAtaque() {
+        int alfa = 0;
+        double sumaExperiencia = 0;
+        double sumaEnergia = 0;
+        int contadorGuerreros = 0;
+        double potenciaAtaque = 0;
+
+        switch (this.tipologia) {
+            case COSTERO:
+                alfa = 3;
+            case ARIDO:
+                alfa = 2;
+            case MONTAÑOSO:
+                alfa = 1;
+
+        }
+
+        for (Subdito s : this.listaSubditos) {
+            if (s instanceof Guerrero) {
+                sumaExperiencia += s.getExperiencia();
+                sumaEnergia += s.getEnergia();
+                contadorGuerreros++;
+            }
+        }
+
+        double mediaExperiencia = sumaExperiencia / contadorGuerreros;
+        double mediaEnergia = sumaEnergia / contadorGuerreros;
+
+        potenciaAtaque = (mediaExperiencia * 100 / (100 - mediaEnergia)) * alfa;
+
+        return (int) potenciaAtaque;
+    }
 }

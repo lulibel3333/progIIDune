@@ -41,6 +41,22 @@ de energía y ganarán 5 unidades de experiencia.
         this.experiencia += 5;
     }
 
+    public static Subdito generarSubdito() {
+
+        double azar = Math.random() * 100;
+
+        if (azar < 30) {
+            return new Recolector();
+        }
+        if (azar < 70) {
+            return new Guerrero();
+        }
+        if (azar < 90) {
+            return new Explorador();
+        }
+        return new Sabio();
+    }
+
     /*
     public int getEnergia() {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody

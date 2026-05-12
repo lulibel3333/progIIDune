@@ -1,7 +1,7 @@
 package modelo.casas;
 
 import java.util.*;
-import modelo.Territorio;
+import modelo.terrritorio.Territorio;
 
 /**
  *
@@ -17,7 +17,7 @@ public abstract class Casa {
     public Casa(ApellidoNobiliario apellido, String lider) {
         this.apellidoNobiliario = apellido;
         this.lider = lider;
-        this.territorios = new Arraylist();
+//        this.territorios = new Arraylist();
 
     }
 }
