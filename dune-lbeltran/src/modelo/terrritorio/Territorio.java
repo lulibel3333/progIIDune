@@ -17,6 +17,7 @@ import static modelo.terrritorio.Capacidad.MEDIA;
  */
 public abstract class Territorio {
 
+    private Casa casa;
     private int extension;
     private Tipologia tipologia;
     private Capacidad capacidad_construccion;
@@ -29,13 +30,12 @@ public abstract class Territorio {
     private List<Subdito> listaSubditos;
 
     //private Estado estado;
-    private Casa casa;
-
-    public Territorio(int extension, Tipologia tipologia, Capacidad capacidad_construccion,
+    public Territorio(Casa casa, int extension, Tipologia tipologia, Capacidad capacidad_construccion,
             int superficie_construida, Capacidad capacidad_generacion_en,
             int energia_inicial, Capacidad capacidad_produccion, int reservas_almacenadas
     /*private Estado estado   */) {
 
+        this.casa = casa;// no puedes crear Casa() pq es unna clase abstracta
         this.extension = extension;
         this.tipologia = tipologia;
         this.capacidad_construccion = capacidad_construccion;
@@ -277,7 +277,6 @@ súbditos prefieren las labores de recolección, el 40 % prefieren
 
     }
      */
-
     public void trasladoSubditos(Territorio origen, Territorio destino) {
         for (Subdito s : origen.getListaSubditos()) {
             s.setEnergia(s.getEnergia() - 20);
@@ -436,5 +435,14 @@ guerreros para conquistar el territorio o retirar
         potenciaAtaque = (mediaExperiencia * 100 / (100 - mediaEnergia)) * alfa;
 
         return (int) potenciaAtaque;
+    }
+
+    public void Morir(Subdito s) {
+        this.listaSubditos.remove(s);
+
+    }
+
+    public void QuienSeQuedaConTerritorio() {
+
     }
 }
